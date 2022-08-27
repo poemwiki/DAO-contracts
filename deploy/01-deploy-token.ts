@@ -11,7 +11,7 @@ const deployGovernanceToken: DeployFunction = async function (hre: HardhatRuntim
   const { deployer } = await getNamedAccounts()
   log("----------------------------------------------------")
   log("Deploying GovernanceToken and waiting for confirmations...")
-  const governanceToken = await deploy("GovernanceToken", {
+  const governanceToken = await deploy("PoemWikiToken", {
     from: deployer,
     args: [],
     log: true,
