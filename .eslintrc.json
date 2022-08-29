@@ -1,0 +1,54 @@
+{
+    "env": {
+        "browser": false,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": [
+            "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".ts",
+                    ".d.ts"
+                ]
+            },
+            "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+        }
+    },
+    "rules": {
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            "error",
+            2
+        ],
+        "node/no-unsupported-features/es-syntax": [
+            "off",
+            {
+                "version": ">=16.0.0",
+                "ignores": []
+            }
+        ]
+    }
+}

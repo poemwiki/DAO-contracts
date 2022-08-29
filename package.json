@@ -1,19 +1,37 @@
 {
   "name": "dao-template",
+  "scripts": {
+    "deploy": "export $(cat .env | xargs) && npx hardhat deploy --network goerli",
+    "node": "export $(cat .env | xargs) && npx hardhat node",
+    "lint": "solhint 'contracts/*.sol'",
+    "lint:fix": "solhint 'contracts/**/*.sol' --fix",
+    "typechain": "yarn hardhat typechain",
+    "ci:clean": "rm -rf ./artifacts ./cache .;types",
+    "verify": "export $(cat .env | xargs) && npx hardhat verify --network goerli 0x7427Dd6C50b807a0DeD327Bbd4F391b4CA54FFA0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts-upgradeable": "^4.7.3"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
     "@nomiclabs/hardhat-etherscan": "^3.0.0",
     "@nomiclabs/hardhat-waffle": "^2.0.2",
-    "@openzeppelin/contracts": "^4.6.0",
-    "@openzeppelin/contracts-upgradeable": "^4.7.3",
+    "@openzeppelin/hardhat-upgrades": "^1.20.0",
     "@typechain/ethers-v5": "^9.0.0",
     "@typechain/hardhat": "^4.0.0",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
     "chai": "^4.3.6",
     "cross-env": "^7.0.2",
     "dotenv": "^10.0.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-eslint": "^7.0.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-import": "^2.25.2",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.7.0",
     "fs": "^0.0.1-security",
@@ -28,13 +46,10 @@
     "solidity-coverage": "^0.7.18",
     "ts-node": "^10.4.0",
     "typechain": "^7.0.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "undici": "^5.10.0"
   },
-  "scripts": {
-    "lint": "solhint 'contracts/*.sol'",
-    "lint:fix": "solhint 'contracts/**/*.sol' --fix",
-    "format": "yarn prettier --write .",
-    "typechain": "yarn hardhat typechain",
-    "ci:clean": "rm -rf ./artifacts ./cache .;types"
+  "engines": {
+    "node": ">=17.0.0"
   }
 }

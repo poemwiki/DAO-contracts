@@ -9,87 +9,102 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 // PoemWiki Reputation Token
 contract PoemWikiReputation is
-  Initializable,
-  ERC20Upgradeable,
-  OwnableUpgradeable,
-  ERC20PermitUpgradeable,
-  ERC20VotesUpgradeable
+    Initializable,
+    ERC20Upgradeable,
+    OwnableUpgradeable,
+    ERC20PermitUpgradeable,
+    ERC20VotesUpgradeable
 {
-  function initialize(string memory _name, string memory _symbol) public initializer {
-    __ERC20_init(_name, _symbol);
-    __Ownable_init();
-    __ERC20Permit_init(_name);
-    __ERC20Votes_init();
-    _mint(msg.sender, 50 * 10**decimals());
-  }
-
-  function mint(address to, uint256 amount) public onlyOwner {
-    _mint(to, amount);
-  }
-
-  function batchMint(address[] memory toArray, uint256[] memory amountArray) public onlyOwner {
-    require(toArray.length == amountArray.length, "Input arrays length not equal");
-    require(toArray.length >= 1, "Input arrays length less than 1");
-    require(toArray.length <= 1000, "Input arrays too long");
-
-    for (uint256 i = 0; i < toArray.length; i++) {
-      mint(toArray[i], amountArray[i]);
+    function initialize(string memory _name, string memory _symbol)
+        public
+        initializer
+    {
+        __ERC20_init(_name, _symbol);
+        __Ownable_init();
+        __ERC20Permit_init(_name);
+        __ERC20Votes_init();
+        _mint(msg.sender, 50 * 10**decimals());
     }
-  }
 
-  function mintAndApprove(address spender, uint256 amount) public onlyOwner {
-    _mint(owner(), amount);
-    approve(spender, amount);
-  }
-
-  function batchTransferFrom(
-    address from,
-    address[] memory toArray,
-    uint256[] memory amountArray
-  ) public virtual returns (bool) {
-    require(from == owner(), "Token transfer from non-owner");
-    require(toArray.length == amountArray.length, "Input arrays length not equal");
-    require(toArray.length <= 1000, "Addresses array too long");
-
-    address spender = _msgSender();
-    for (uint256 i = 0; i < toArray.length; i++) {
-      _spendAllowance(from, spender, amountArray[i]);
-      _transfer(from, toArray[i], amountArray[i]);
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
     }
-    return true;
-  }
 
-  function _beforeTokenTransfer(
-    address from,
-    address to,
-    uint256 amount
-  ) internal override(ERC20Upgradeable) {
-    require(from == owner() || from == address(0), "Token transfer from non-owner");
+    function batchMint(address[] memory toArray, uint256[] memory amountArray)
+        public
+        onlyOwner
+    {
+        require(
+            toArray.length == amountArray.length,
+            "Input arrays length not equal"
+        );
+        require(toArray.length >= 1, "Input arrays length less than 1");
+        require(toArray.length <= 1000, "Input arrays too long");
 
-    super._beforeTokenTransfer(from, to, amount);
-  }
+        for (uint256 i = 0; i < toArray.length; i++) {
+            mint(toArray[i], amountArray[i]);
+        }
+    }
 
-  // The following functions are overrides required by Solidity.
+    function mintAndApprove(address spender, uint256 amount) public onlyOwner {
+        _mint(owner(), amount);
+        approve(spender, amount);
+    }
 
-  function _afterTokenTransfer(
-    address from,
-    address to,
-    uint256 amount
-  ) internal override(ERC20Upgradeable, ERC20VotesUpgradeable) {
-    super._afterTokenTransfer(from, to, amount);
-  }
+    function batchTransferFrom(
+        address from,
+        address[] memory toArray,
+        uint256[] memory amountArray
+    ) public virtual returns (bool) {
+        require(from == owner(), "Token transfer from non-owner");
+        require(
+            toArray.length == amountArray.length,
+            "Input arrays length not equal"
+        );
+        require(toArray.length <= 1000, "Addresses array too long");
 
-  function _mint(address to, uint256 amount)
-    internal
-    override(ERC20Upgradeable, ERC20VotesUpgradeable)
-  {
-    super._mint(to, amount);
-  }
+        address spender = _msgSender();
+        for (uint256 i = 0; i < toArray.length; i++) {
+            _spendAllowance(from, spender, amountArray[i]);
+            _transfer(from, toArray[i], amountArray[i]);
+        }
+        return true;
+    }
 
-  function _burn(address account, uint256 amount)
-    internal
-    override(ERC20Upgradeable, ERC20VotesUpgradeable)
-  {
-    super._burn(account, amount);
-  }
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override(ERC20Upgradeable) {
+        require(
+            from == owner() || from == address(0),
+            "Token transfer from non-owner"
+        );
+
+        super._beforeTokenTransfer(from, to, amount);
+    }
+
+    // The following functions are overrides required by Solidity.
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override(ERC20Upgradeable, ERC20VotesUpgradeable) {
+        super._afterTokenTransfer(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount)
+        internal
+        override(ERC20Upgradeable, ERC20VotesUpgradeable)
+    {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+        internal
+        override(ERC20Upgradeable, ERC20VotesUpgradeable)
+    {
+        super._burn(account, amount);
+    }
 }

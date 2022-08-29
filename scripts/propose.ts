@@ -1,18 +1,17 @@
-import { ethers, network } from "hardhat"
+import { ethers, network } from 'hardhat'
 import {
   developmentChains,
   VOTING_DELAY,
   proposalsFile,
-  FUNC,
-  PROPOSAL_DESCRIPTION,
-  NEW_STORE_VALUE,
-} from "../helper-hardhat-config"
-import * as fs from "fs"
-import { moveBlocks } from "../utils/move-blocks"
+  MINT_FUNC,
+  PROPOSAL_DESCRIPTION
+} from '../helper-hardhat-config'
+import * as fs from 'fs'
+import { moveBlocks } from '../utils/move-blocks'
 
 export async function propose(args: any[], functionToCall: string, proposalDescription: string) {
-  const governor = await ethers.getContract("GovernorContract")
-  const box = await ethers.getContract("Box")
+  const governor = await ethers.getContract('GovernorContract')
+  const box = await ethers.getContract('Box')
   const encodedFunctionCall = box.interface.encodeFunctionData(functionToCall, args)
   console.log(`Proposing ${functionToCall} on ${box.address} with ${args}`)
   console.log(`Proposal Description:\n  ${proposalDescription}`)
@@ -34,7 +33,7 @@ export async function propose(args: any[], functionToCall: string, proposalDescr
   const proposalSnapShot = await governor.proposalSnapshot(proposalId)
   const proposalDeadline = await governor.proposalDeadline(proposalId)
   // save the proposalId
-  let proposals = JSON.parse(fs.readFileSync(proposalsFile, "utf8"))
+  const proposals = JSON.parse(fs.readFileSync(proposalsFile, 'utf8'))
   proposals[network.config.chainId!.toString()].push(proposalId.toString())
   fs.writeFileSync(proposalsFile, JSON.stringify(proposals))
 
@@ -46,7 +45,7 @@ export async function propose(args: any[], functionToCall: string, proposalDescr
   console.log(`Current Proposal Deadline: ${proposalDeadline}`)
 }
 
-propose([NEW_STORE_VALUE], FUNC, PROPOSAL_DESCRIPTION)
+propose([NEW_STORE_VALUE], MINT_FUNC, PROPOSAL_DESCRIPTION)
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error)

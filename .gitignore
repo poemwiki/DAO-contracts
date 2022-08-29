@@ -13,3 +13,5 @@ typechain-types
 gas-report.txt
 deployments
 .yarn-error.log
+.openzeppelin
+.vscode
