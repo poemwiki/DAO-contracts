@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesUpg
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 // PoemWiki Reputation Token
-contract PoemWikiReputation is
+contract PoemWikiReputationV2 is
     Initializable,
     ERC20Upgradeable,
     OwnableUpgradeable,
@@ -50,8 +50,8 @@ contract PoemWikiReputation is
     }
 
     function mintAndApprove(address spender, uint256 amount) public onlyOwner {
-        _mint(owner(), amount);
-        approve(spender, amount);
+        _mint(msg.sender, amount);
+        _approve(msg.sender, spender, amount);
     }
 
     function batchTransferFrom(
