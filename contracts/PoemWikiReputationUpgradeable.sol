@@ -15,7 +15,7 @@ contract PoemWikiReputation is
     ERC20PermitUpgradeable,
     ERC20VotesUpgradeable
 {
-    function initialize(string memory _name, string memory _symbol)
+    function initialize(string calldata _name, string calldata _symbol)
         public
         initializer
     {
@@ -25,18 +25,34 @@ contract PoemWikiReputation is
         __ERC20Votes_init();
         _mint(
             0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
-            110000 * 10**decimals()
-        );
+            5041300 * 10**decimals()
+        ); // fan
+        _mint(
+            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            2220000 * 10**decimals()
+        ); // vico
+        _mint(
+            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            1533000 * 10**decimals()
+        ); // Alina
+        _mint(
+            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            1500000 * 10**decimals()
+        ); // moontree
+        _mint(
+            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            360000 * 10**decimals()
+        ); // Jeff
     }
 
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
 
-    function batchMint(address[] memory toArray, uint256[] memory amountArray)
-        public
-        onlyOwner
-    {
+    function batchMint(
+        address[] calldata toArray,
+        uint256[] calldata amountArray
+    ) external onlyOwner {
         require(
             toArray.length == amountArray.length,
             "Input arrays length not equal"
@@ -45,20 +61,23 @@ contract PoemWikiReputation is
         require(toArray.length <= 1000, "Input arrays too long");
 
         for (uint256 i = 0; i < toArray.length; i++) {
-            mint(toArray[i], amountArray[i]);
+            _mint(toArray[i], amountArray[i]);
         }
     }
 
-    function mintAndApprove(address spender, uint256 amount) public onlyOwner {
-        _mint(owner(), amount);
-        approve(spender, amount);
+    function mintAndApprove(address spender, uint256 amount)
+        external
+        onlyOwner
+    {
+        _mint(msg.sender, amount);
+        _approve(msg.sender, spender, amount);
     }
 
     function batchTransferFrom(
         address from,
-        address[] memory toArray,
-        uint256[] memory amountArray
-    ) public virtual returns (bool) {
+        address[] calldata toArray,
+        uint256[] calldata amountArray
+    ) external virtual returns (bool) {
         require(from == owner(), "Token transfer from non-owner");
         require(
             toArray.length == amountArray.length,
