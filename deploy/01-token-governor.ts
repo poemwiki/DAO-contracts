@@ -39,7 +39,8 @@ const deployGovernanceToken: DeployFunction = async function (hre: HardhatRuntim
   // await delegate(contractName, governanceToken.address, deployer)
   // log('Delegated!')
 
-  await deployGovernor(hre, contractName, governanceToken.address)
+  const governor = await deployGovernor(hre, contractName, governanceToken.address)
+  await transferOwnership(contractName, governanceToken.address, governor.address)
 }
 
 async function getImplimentationContract(contractFactory: ContractFactory, network: Network) {
@@ -79,6 +80,14 @@ async function deployGovernor(hre: HardhatRuntimeEnvironment, tokenContractName:
   // }
 
   return governor
+}
+
+async function transferOwnership(contractName: string, tokenAddress: string, newOwner: string) {
+  const token = await ethers.getContractAt(contractName, tokenAddress)
+  const transactionResponse = await token.transferOwnership(newOwner)
+
+  await transactionResponse.wait(1)
+  console.log(`Transfered ownership of token contract to: ${await token.owner()}`)
 }
 
 async function delegate(contractName: string, governanceTokenAddress: string, delegatedAccount: string) {
