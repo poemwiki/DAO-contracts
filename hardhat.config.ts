@@ -31,6 +31,11 @@ const config: HardhatUserConfig = {
       accounts: [PRIVATE_KEY],
       chainId: 5,
     },
+    polygon: {
+      url: process.env.POLYGON_RPC_URL as string,
+      accounts: [PRIVATE_KEY],
+      chainId: 137,
+    }
   },
   solidity: {
     version: '0.8.4',
@@ -42,7 +47,10 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY,
+    apiKey: {
+      goerli: ETHERSCAN_API_KEY,
+      polygon: process.env.POLYSCAN_API_KEY
+    },
   },
   gasReporter: {
     enabled: true,
