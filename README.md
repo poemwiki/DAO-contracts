@@ -27,7 +27,7 @@ It's recommended that you've gone through the [hardhat getting started documenta
 git clone https://github.com/PatrickAlphaC/dao-template
 cd dao-template
 ```
-2. Install dependencies
+2. Install dependencies and set governor values
 ```sh
 yarn
 ```
@@ -37,6 +37,8 @@ or
 ```
 npm i 
 ```
+
+Open helper-hardhat-config.ts, set QUORUM_PERCENTAGE, VOTING_PERIOD, VOTING_DELAY, THRESHOLD to what you want.
 
 3. Run the test suite (which also has all the functionality)
 
