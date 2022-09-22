@@ -35,9 +35,9 @@ const deployGovernanceToken: DeployFunction = async function (hre: HardhatRuntim
   //   await verify(tokenImpl.address, [])
   // }
 
-  log(`Delegating to ${deployer}`)
-  await delegate(contractName, governanceToken.address, deployer)
-  log('Delegated!')
+  // log(`Delegating to ${deployer}`)
+  // await delegate(contractName, governanceToken.address, deployer)
+  // log('Delegated!')
 
   await deployGovernor(hre, contractName, governanceToken.address)
 }
