@@ -28,19 +28,19 @@ contract PoemWikiReputation is
             5041300 * 10**decimals()
         ); // fan
         _mint(
-            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            0x7342D503201e3fcC6cC08F0EFDa73bd3C3119A9a,
             2220000 * 10**decimals()
         ); // vico
         _mint(
-            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            0xAD1a31DcD5eBf7EE8cA058EC5BFC948B67cb88ae,
             1533000 * 10**decimals()
         ); // Alina
         _mint(
-            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            0x3aAfa1d5B0e81303D0A539773AC215b88F220fb6,
             1500000 * 10**decimals()
         ); // moontree
         _mint(
-            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
+            0x8B638e1af852c81A0F844570A1f52207e7F0A1a5,
             360000 * 10**decimals()
         ); // Jeff
     }
