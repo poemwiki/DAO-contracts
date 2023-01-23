@@ -15,6 +15,8 @@ contract PoemWikiReputation is
     ERC20PermitUpgradeable,
     ERC20VotesUpgradeable
 {
+    event MintAndApprove(address spender, uint256 amount);
+
     function initialize(string calldata _name, string calldata _symbol)
         public
         initializer
@@ -71,6 +73,7 @@ contract PoemWikiReputation is
     {
         _mint(msg.sender, amount);
         _approve(msg.sender, spender, amount);
+        emit MintAndApprove(spender, amount);
     }
 
     function batchTransferFrom(
