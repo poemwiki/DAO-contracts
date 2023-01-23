@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesUpg
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 // PoemWiki Reputation Token
-contract PoemWikiReputation is
+contract Reputation is
     Initializable,
     ERC20Upgradeable,
     OwnableUpgradeable,
