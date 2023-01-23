@@ -18,7 +18,7 @@ const deployGovernanceToken: DeployFunction = async function (hre: HardhatRuntim
 
   log('----------------------------------------------------')
   log('Deploying GovernanceToken and waiting for confirmations...')
-  const contractName = 'PoemWikiReputation'
+  const contractName = 'Reputation'
   const contract = await ethers.getContractFactory(contractName)
   const governanceToken = await upgrades.deployProxy(contract, [
     contractName, 'PWR'
@@ -58,8 +58,8 @@ async function deployGovernor(hre: HardhatRuntimeEnvironment, tokenContractName:
   log('----------------------------------------------------')
   console.log('Deploying GovernorContract and waiting for confirmations...')
 
-  const contractName = 'PoemWikiGovernor'
-  const contract = await ethers.getContractFactory('PoemwikiGovernor')
+  const contractName = 'Governor'
+  const contract = await ethers.getContractFactory('Governor')
   const governor = await upgrades.deployProxy(contract, [
     contractName,
     tokenAdress,
