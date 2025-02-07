@@ -25,26 +25,10 @@ contract Reputation is
         __Ownable_init();
         __ERC20Permit_init(_name);
         __ERC20Votes_init();
-        _mint(
-            0x92332AC26F1afAFc6cCFA0d93F5037F422b21720,
-            5041300 * 10**decimals()
-        ); // fan
-        _mint(
-            0x7342D503201e3fcC6cC08F0EFDa73bd3C3119A9a,
-            2220000 * 10**decimals()
-        ); // vico
-        _mint(
-            0xAD1a31DcD5eBf7EE8cA058EC5BFC948B67cb88ae,
-            1533000 * 10**decimals()
-        ); // Alina
-        _mint(
-            0x3aAfa1d5B0e81303D0A539773AC215b88F220fb6,
-            1500000 * 10**decimals()
-        ); // moontree
-        _mint(
-            0x8B638e1af852c81A0F844570A1f52207e7F0A1a5,
-            360000 * 10**decimals()
-        ); // Jeff
+        // _mint(
+        //     0x80aa3b720539037587A21BAB2B8425911D1445f1,
+        //     10000 * 10**decimals()
+        // ); // mint to test address 
     }
 
     function mint(address to, uint256 amount) external onlyOwner {
