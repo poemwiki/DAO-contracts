@@ -55,14 +55,14 @@ If you want to deploy to a testnet:
 ![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+) **WARNING** ![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+)
 > DO NOT PUSH YOUR PRIVATE_KEY TO GITHUB
 
-5. Deploy to testnet e.g. goerli
+5. Deploy to testnet e.g. polygonAmoy
 ```
-npm run deploy goerli
+npm run deploy polygonAmoy
 ```
 
 6. Verify contracts at 0x... through etherscan API
 ```
-npm run verify goerli 0x...
+npm run verify polygonAmoy 0x...
 ```
 
 
