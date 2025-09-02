@@ -25,10 +25,11 @@ contract Reputation is
         __Ownable_init();
         __ERC20Permit_init(_name);
         __ERC20Votes_init();
+        // uncomment lines below to mint your initial holders
         // _mint(
         //     0x80aa3b720539037587A21BAB2B8425911D1445f1,
-        //     10000 * 10**decimals()
-        // ); // mint to test address 
+        //     8000000 * 10**decimals()
+        // );
     }
 
     function mint(address to, uint256 amount) external onlyOwner {
